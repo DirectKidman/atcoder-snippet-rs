@@ -8,8 +8,8 @@ pub struct UnionFind {
 
 #[snippet("UFT")]
 impl UnionFind {
-    pub fn new(n: usize) -> UnionFind {
-        UnionFind {
+    pub fn new(n: usize) -> Self {
+        Self {
             par: (0..n).into_iter().collect(),
             siz: vec![1; n],
         }
@@ -65,5 +65,19 @@ impl UnionFind {
             .into_iter()
             .filter(|x| !x.is_empty())
             .collect::<Vec<Vec<usize>>>()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::UnionFind;
+
+    #[test]
+    fn uf_test() {
+        let mut uf = UnionFind::new(4);
+        uf.unite(0, 1);
+        uf.unite(1, 2);
+        assert!(uf.same(0, 2));
+        assert_eq!(vec![vec![0, 1, 2], vec![3]], uf.groups())
     }
 }

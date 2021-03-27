@@ -8,7 +8,7 @@ pub struct SparseTable<T: Ord + Copy + Default> {
 
 #[snippet("SPT")]
 impl<T: Ord + Copy + Default> SparseTable<T> {
-    pub fn new(arr: &[T]) -> SparseTable<T> {
+    pub fn new(arr: &[T]) -> Self {
         let mut b = 0;
         let n = arr.len();
         while (1 << b) <= n {
@@ -30,7 +30,7 @@ impl<T: Ord + Copy + Default> SparseTable<T> {
             log_table[i] = log_table[i >> 1] + 1;
         }
 
-        SparseTable { table, log_table }
+        Self { table, log_table }
     }
 
     #[inline]
@@ -38,5 +38,19 @@ impl<T: Ord + Copy + Default> SparseTable<T> {
         let k = self.log_table[r - l];
 
         std::cmp::min(self.table[k][l], self.table[k][r - (1 << k)])
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::SparseTable;
+    #[test]
+    fn spt_test() {
+        let v = vec![3, 2, 4, 5, 1, 32, 12, 9];
+        let spt = SparseTable::new(&v);
+
+        assert_eq!(spt.query(1, 3), 2);
+        assert_eq!(spt.query(5, 8), 9);
+        assert_eq!(spt.query(0, 8), 1);
     }
 }
