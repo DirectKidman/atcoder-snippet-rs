@@ -1,11 +1,16 @@
+use cargo_snippet::snippet;
+
+#[snippet("Modint")]
 use std::mem::swap;
 use std::ops::*;
 
+#[snippet("Modint")]
 #[derive(Copy, Clone, Debug)]
 pub struct Modint<const MOD: usize> {
     val: usize,
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> Modint<MOD> {
     pub fn new(val: usize) -> Self {
         Modint { val: val % MOD }
@@ -34,6 +39,7 @@ impl<const MOD: usize> Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> Add for Modint<MOD> {
     type Output = Self;
 
@@ -44,12 +50,14 @@ impl<const MOD: usize> Add for Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> AddAssign for Modint<MOD> {
     fn add_assign(&mut self, rhs: Modint<MOD>) {
         *self = *self + rhs;
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> Sub for Modint<MOD> {
     type Output = Self;
 
@@ -60,12 +68,14 @@ impl<const MOD: usize> Sub for Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> SubAssign for Modint<MOD> {
     fn sub_assign(&mut self, rhs: Modint<MOD>) {
         *self = *self - rhs;
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> Mul for Modint<MOD> {
     type Output = Modint<MOD>;
 
@@ -76,12 +86,14 @@ impl<const MOD: usize> Mul for Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> MulAssign for Modint<MOD> {
     fn mul_assign(&mut self, rhs: Modint<MOD>) {
         *self = *self * rhs;
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> Div for Modint<MOD> {
     type Output = Modint<MOD>;
 
@@ -92,12 +104,14 @@ impl<const MOD: usize> Div for Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> DivAssign for Modint<MOD> {
     fn div_assign(&mut self, rhs: Modint<MOD>) {
         *self = *self / rhs;
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> From<i32> for Modint<MOD> {
     fn from(x: i32) -> Self {
         let mut tmp = x;
@@ -109,6 +123,7 @@ impl<const MOD: usize> From<i32> for Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> From<usize> for Modint<MOD> {
     fn from(x: usize) -> Self {
         let res = Modint::new(x);
@@ -116,12 +131,14 @@ impl<const MOD: usize> From<usize> for Modint<MOD> {
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> std::fmt::Display for Modint<MOD> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.val)
     }
 }
 
+#[snippet("Modint")]
 impl<const MOD: usize> PartialEq for Modint<MOD> {
     fn eq(&self, other: &Self) -> bool {
         self.val == other.val

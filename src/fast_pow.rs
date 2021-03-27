@@ -1,4 +1,4 @@
-fn pow_mod(x: usize, k: usize, md: usize) -> usize {
+pub fn pow_mod(x: usize, k: usize, md: usize) -> usize {
     let mut tmp = 1;
     let mut m = k;
     let mut d = x;
@@ -20,6 +20,6 @@ mod tests {
     use super::*;
     #[test]
     fn pow_mod_test() {
-        assert_eq!(2 + 2, 4);
+        assert_eq!(pow_mod(2, 3, 3), 2);
     }
 }
