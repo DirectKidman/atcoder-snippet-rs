@@ -36,7 +36,7 @@ impl<T: Copy> Segtree<T> {
         id += self.n;
         self.data[id] = val;
         id >>= 1;
-        while (id >> 1) > 0 {
+        while id > 0 {
             self.data[id] = (self.op)(self.data[(id << 1)], self.data[(id << 1) + 1]);
             id >>= 1;
         }
@@ -79,12 +79,13 @@ mod tests {
 
     #[test]
     fn segtree_test() {
-        let v = vec![1, 3, 5, 2, 6];
+        let v = vec![1, 3];
         let mut seg = Segtree::new(&v, 0, |x, y| std::cmp::max(x, y));
 
-        assert_eq!(seg.prod(1, 3), 5);
-        seg.set(2, 4);
-        assert_eq!(seg.prod(0, 5), 6);
-        assert_eq!(seg.all_prod(), 6);
+        assert_eq!(seg.prod(1, 2), 3);
+        assert_eq!(seg.all_prod(), 3);
+        seg.set(1, 4);
+        assert_eq!(seg.all_prod(), 4);
+        assert_eq!(seg.prod(0, 2), 4);
     }
 }

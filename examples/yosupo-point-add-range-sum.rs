@@ -49,7 +49,8 @@ fn main() {
     let mut seg = Segtree::new(&a, 0, |x, y| x + y);
     for q in query {
         if q.0 == 0 {
-            seg.set(q.1, seg.get(q.1) + q.2);
+            let tmp = seg.get(q.1);
+            seg.set(q.1, tmp + q.2);
         } else {
             let res = seg.prod(q.1, q.2);
             println!("{}", res);
@@ -88,7 +89,7 @@ impl<T: Copy> Segtree<T> {
         id += self.n;
         self.data[id] = val;
         id >>= 1;
-        while (id >> 1) > 0 {
+        while id > 0 {
             self.data[id] = (self.op)(self.data[(id << 1)], self.data[(id << 1) + 1]);
             id >>= 1;
         }
