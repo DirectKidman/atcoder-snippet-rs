@@ -27,7 +27,7 @@ pub struct Factorize {
 
 #[snippet("Factorize")]
 impl Factorize {
-    fn new(max_n: usize) -> Self {
+    pub fn new(max_n: usize) -> Self {
         let mut fac: Vec<usize> = (0..=max_n).collect();
 
         let mut i = 2;

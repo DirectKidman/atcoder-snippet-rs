@@ -16,7 +16,7 @@ impl<const MOD: usize> Modint<MOD> {
         Modint { val: val % MOD }
     }
 
-    fn inv(&self) -> Self {
+    pub fn inv(&self) -> Self {
         let mut x: i32 = 1;
         let mut u: i32 = 0;
         let mut s: i32 = self.val as i32;
@@ -154,6 +154,8 @@ mod tests {
         type Mint = Modint<1_000_000_007>;
         let x: Mint = 1_000_000.into();
         let y: Mint = 2_000_000.into();
+        // let a: Mint = 3.into();
         assert_eq!(x * y, 999986007.into());
+        // assert_eq!(a.inv(), 333333336.into());
     }
 }
