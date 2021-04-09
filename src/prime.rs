@@ -18,6 +18,32 @@ pub fn prime_list(n: usize) -> Vec<usize> {
     list
 }
 
+#[snippet]
+fn prime_factorize(mut n: usize) -> Vec<(usize, usize)> {
+    let mut res = vec![];
+
+    let mut i = 2;
+    while i * i <= n {
+        if n % i != 0 {
+            i += 1;
+            continue;
+        }
+
+        let mut ex = 0;
+        while n % i == 0 {
+            ex += 1;
+            n /= i;
+        }
+        res.push((i, ex));
+
+        i += 1;
+    }
+    if n != 1 {
+        res.push((n, 1));
+    }
+    res
+}
+
 #[snippet("Factorize")]
 use std::collections::HashMap;
 #[snippet("Factorize")]
