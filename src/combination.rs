@@ -1,9 +1,13 @@
+use cargo_snippet::snippet;
+
+#[snippet("Comb")]
 pub struct Combination {
     fac: Vec<usize>,
     finv: Vec<usize>,
     m: usize,
 }
 
+#[snippet("Comb")]
 impl Combination {
     pub fn new(n: usize, m: usize) -> Self {
         let mut inv = vec![1; n + 1];
