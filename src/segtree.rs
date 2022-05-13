@@ -1,16 +1,20 @@
 use cargo_snippet::snippet;
 
 #[snippet("Segtree")]
-pub struct Segtree<T: Copy> {
+pub struct Segtree<T: Copy, Op> {
     n: usize,
     data: Vec<T>,
     identity: T,
-    op: fn(T, T) -> T,
+    op: Op,
 }
 
 #[snippet("Segtree")]
-impl<T: Copy> Segtree<T> {
-    pub fn new(arr: &Vec<T>, identity: T, op: fn(T, T) -> T) -> Self {
+impl<T, Op> Segtree<T, Op> 
+where
+    T: Copy,
+    Op: Fn(T,T) -> T + Copy,
+{
+    pub fn new(arr: &Vec<T>, identity: T, op: Op) -> Self {
         let n = arr.len();
         let mut b = 1;
         while b < n {

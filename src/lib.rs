@@ -1,3 +1,4 @@
+pub mod chinese_remainder_theorem;
 pub mod combination;
 pub mod fast_pow;
 pub mod graph;
