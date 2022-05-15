@@ -9,3 +9,4 @@ pub mod prime;
 pub mod segtree;
 pub mod sparce_table;
 pub mod union_find;
+pub mod ntt;
