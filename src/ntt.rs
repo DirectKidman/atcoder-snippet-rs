@@ -1,9 +1,13 @@
+use cargo_snippet::snippet;
+
+#[snippet("NTT")]
 pub struct FastFourierTransform {
     modulo: i64,
     sum_e: [i64; 30],
     sum_ie: [i64; 30],
 }
 
+#[snippet("NTT")]
 impl FastFourierTransform {
     pub fn new(modulo: i64) -> Self {
         let primitive_root = primitive_root(modulo);
@@ -138,10 +142,12 @@ impl FastFourierTransform {
     }
 }
 
+#[snippet("NTT")]
 fn mod_inv(x: i64, m: i64) -> i64 {
     mod_pow(x, m - 2, m)
 }
 
+#[snippet("NTT")]
 fn mod_pow(x: i64, mut e: i64, m: i64) -> i64 {
     let mut cur = x;
     let mut result = 1;
@@ -155,6 +161,7 @@ fn mod_pow(x: i64, mut e: i64, m: i64) -> i64 {
     result
 }
 
+#[snippet("NTT")]
 fn primitive_root(m: i64) -> i64 {
     if m == 2 {
         return 1;
