@@ -1,6 +1,9 @@
 use cargo_snippet::snippet;
 
 #[snippet("NTT")]
+/*
+This algorithm is cited from kenkooo's competitive programming library.
+*/
 pub struct FastFourierTransform {
     modulo: i64,
     sum_e: [i64; 30],

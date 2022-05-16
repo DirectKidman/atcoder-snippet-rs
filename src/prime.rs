@@ -45,7 +45,7 @@ fn prime_factorize(mut n: usize) -> Vec<(usize, usize)> {
 }
 
 #[snippet("Factorize")]
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 #[snippet("Factorize")]
 pub struct Factorize {
     fac: Vec<usize>,
@@ -70,8 +70,8 @@ impl Factorize {
         Factorize { fac }
     }
 
-    pub fn factorize(&self, n: usize) -> HashMap<usize, usize> {
-        let mut hm = HashMap::new();
+    pub fn factorize(&self, n: usize) -> BTreeMap<usize, usize> {
+        let mut hm = BTreeMap::new();
         let mut tmp = n;
         while tmp != 1 {
             let cnt = hm.entry(self.fac[tmp]).or_insert(0);
@@ -93,7 +93,7 @@ mod tests {
     #[test]
     fn factorize_test() {
         let fac = Factorize::new(1000);
-        let mut ans = HashMap::new();
+        let mut ans = BTreeMap::new();
         ans.insert(2, 3);
         ans.insert(3, 1);
         assert_eq!(fac.factorize(24), ans);
