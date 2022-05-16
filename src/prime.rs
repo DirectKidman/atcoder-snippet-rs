@@ -19,9 +19,8 @@ pub fn prime_list(n: usize) -> Vec<usize> {
 }
 
 #[snippet]
-fn prime_factorize(mut n: usize) -> Vec<(usize, usize)> {
+pub fn prime_factorize(mut n: usize) -> Vec<(usize, usize)> {
     let mut res = vec![];
-
     let mut i = 2;
     while i * i <= n {
         if n % i != 0 {
@@ -97,5 +96,11 @@ mod tests {
         ans.insert(2, 3);
         ans.insert(3, 1);
         assert_eq!(fac.factorize(24), ans);
+    }
+
+    #[test]
+    fn prime_factorize_test() {
+        let factors = prime_factorize(24);
+        assert_eq!(vec![(2,3),(3,1)], factors);
     }
 }

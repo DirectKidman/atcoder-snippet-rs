@@ -2,6 +2,7 @@ use std::cmp::min;
 // use std::fmt;
 const INF: i64 = 1 << 31;
 
+#[allow(dead_code)]
 pub struct LazySegmentTree {
     n: usize,
     sz: usize,
