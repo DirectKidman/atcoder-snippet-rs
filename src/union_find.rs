@@ -10,7 +10,7 @@ pub struct UnionFind {
 impl UnionFind {
     pub fn new(n: usize) -> Self {
         Self {
-            par: (0..n).into_iter().collect(),
+            par: (0..n).collect(),
             siz: vec![1; n],
         }
     }
