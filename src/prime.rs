@@ -11,7 +11,7 @@ pub fn prime_list(n: usize) -> Vec<usize> {
         }
         list.push(i);
 
-        for j in (i * 2..=n).into_iter().step_by(i) {
+        for j in (i * i..=n).step_by(i) {
             is_prime[j] = false;
         }
     }
@@ -101,6 +101,6 @@ mod tests {
     #[test]
     fn prime_factorize_test() {
         let factors = prime_factorize(24);
-        assert_eq!(vec![(2,3),(3,1)], factors);
+        assert_eq!(vec![(2, 3), (3, 1)], factors);
     }
 }
