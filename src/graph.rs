@@ -21,7 +21,7 @@ impl Edge {
 #[snippet(include = "Graph")]
 pub fn shortest_path(graph: &Graph, start: usize, goal: usize) -> (usize, Vec<usize>) {
     use std::cmp::Reverse;
-    let mut dist = vec![usize::MAX / 2; graph.len()];
+    let mut dist = vec![std::usize::MAX / 2; graph.len()];
     let mut prev = vec![None; graph.len()];
     dist[start] = 0;
     let mut pq = std::collections::BinaryHeap::new();
