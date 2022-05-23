@@ -1,12 +1,12 @@
 pub mod chinese_remainder_theorem;
 pub mod combination;
-pub mod fast_pow;
 pub mod graph;
 pub mod lazy_seg;
 pub mod math;
 pub mod modint;
+pub mod ntt;
+pub mod pollard_rho;
 pub mod prime;
 pub mod segtree;
 pub mod sparce_table;
 pub mod union_find;
-pub mod ntt;
