@@ -81,7 +81,7 @@ impl Factorize {
     }
 
     pub fn is_prime(&self, n: usize) -> bool {
-        self.fac[n] == n
+        n > 1 && self.fac[n] == n
     }
 }
 
@@ -106,5 +106,13 @@ mod tests {
     fn prime_factorize_test() {
         let factors = prime_factorize(24);
         assert_eq!(vec![(2, 3), (3, 1)], factors);
+    }
+
+    #[test]
+    fn is_prime_test() {
+        let fac = Factorize::new(100);
+        assert!(fac.is_prime(37));
+        assert!(!fac.is_prime(1));
+        assert!(!fac.is_prime(24));
     }
 }
