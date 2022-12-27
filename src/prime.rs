@@ -79,6 +79,10 @@ impl Factorize {
         }
         hm
     }
+
+    pub fn is_prime(&self, n: usize) -> bool {
+        self.fac[n] == n
+    }
 }
 
 #[cfg(test)]
