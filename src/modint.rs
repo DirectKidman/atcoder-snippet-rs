@@ -1,7 +1,6 @@
 use cargo_snippet::snippet;
 
 #[snippet("Modint")]
-use std::mem::swap;
 use std::ops::*;
 
 #[snippet("Modint")]
@@ -21,25 +20,24 @@ impl<const MOD: usize> Modint<MOD> {
     }
 
     pub fn inv(&self) -> Self {
-        let mut x: i32 = 1;
-        let mut u: i32 = 0;
-        let mut s: i32 = self.val as i32;
-        let mut t: i32 = MOD as i32;
+        let mut x: isize = 1;
+        let mut y: isize = 0;
+        let mut s: isize = self.val as isize;
+        let mut t: isize = MOD as isize;
 
         while t != 0 {
             let k = s / t;
             s -= k * t;
-            swap(&mut s, &mut t);
-            x -= k * t;
-            swap(&mut x, &mut u);
+            std::mem::swap(&mut s, &mut t);
+            x -= k * y;
+            std::mem::swap(&mut x, &mut y);
         }
-        x %= MOD as i32;
+        x %= MOD as isize;
         if x < 0 {
-            x += MOD as i32;
+            x += MOD as isize;
         }
 
-        let x = x as usize;
-        Modint { val: x }
+        Modint { val: x as usize }
     }
 
     pub fn pow(&self, mut p: usize) -> Modint<MOD> {
@@ -164,9 +162,14 @@ mod tests {
         type Mint = Modint<1_000_000_007>;
         let x: Mint = 1_000_000.into();
         let y: Mint = 2_000_000.into();
-        // let a: Mint = 3.into();
         assert_eq!(x * y, 999986007.into());
-        // assert_eq!(a.inv(), 333333336.into());
+    }
+
+    #[test]
+    fn modint_inv_test() {
+        type Mint = Modint<1_000_000_007>;
+        let a: Mint = 3.into();
+        assert_eq!(a.inv(), 333333336.into());
     }
 
     #[test]
