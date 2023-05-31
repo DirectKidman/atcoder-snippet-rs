@@ -5,7 +5,7 @@ use std::mem::swap;
 use std::ops::*;
 
 #[snippet("Modint")]
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct Modint<const MOD: usize> {
     val: usize,
 }
@@ -14,6 +14,10 @@ pub struct Modint<const MOD: usize> {
 impl<const MOD: usize> Modint<MOD> {
     pub fn new(val: usize) -> Self {
         Modint { val: val % MOD }
+    }
+
+    pub fn val(&self) -> usize {
+        self.val
     }
 
     pub fn inv(&self) -> Self {
@@ -36,6 +40,19 @@ impl<const MOD: usize> Modint<MOD> {
 
         let x = x as usize;
         Modint { val: x }
+    }
+
+    pub fn pow(&self, mut p: usize) -> Modint<MOD> {
+        let mut res = 1.into();
+        let mut mul = *self;
+        while p > 0 {
+            if p & 1 == 1 {
+                res *= mul;
+            }
+            mul *= mul;
+            p >>= 1;
+        }
+        res
     }
 }
 
@@ -138,24 +155,27 @@ impl<const MOD: usize> std::fmt::Display for Modint<MOD> {
     }
 }
 
-#[snippet("Modint")]
-impl<const MOD: usize> PartialEq for Modint<MOD> {
-    fn eq(&self, other: &Self) -> bool {
-        self.val == other.val
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::Modint;
 
     #[test]
-    fn modint_test() {
+    fn modint_val_test() {
         type Mint = Modint<1_000_000_007>;
         let x: Mint = 1_000_000.into();
         let y: Mint = 2_000_000.into();
         // let a: Mint = 3.into();
         assert_eq!(x * y, 999986007.into());
         // assert_eq!(a.inv(), 333333336.into());
+    }
+
+    #[test]
+    fn modint_pow_test() {
+        type Mint = Modint<100>;
+        let x: Mint = 3.into();
+        let y: Mint = 4.into();
+        assert_eq!(x.pow(3), 27.into());
+        assert_eq!(y.pow(4), 56.into());
+        assert_eq!(Modint::<100>::new(123).pow(1299293), 83.into());
     }
 }
