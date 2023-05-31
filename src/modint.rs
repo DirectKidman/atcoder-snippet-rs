@@ -169,7 +169,9 @@ mod tests {
     fn modint_inv_test() {
         type Mint = Modint<1_000_000_007>;
         let a: Mint = 3.into();
+        let b: Mint = 100.into();
         assert_eq!(a.inv(), 333333336.into());
+        assert_eq!(b.inv(), 570000004.into());
     }
 
     #[test]
